@@ -19,11 +19,16 @@ class Todo(db.Model):
 
 @app.route("/")
 def hello_world():
+    todo = Todo(title = "First Todo",desc ="Testing first todo!")
+    db.session.add(todo)
+    db.session.commit()
     return render_template('index.html')
 
-@app.route('/welcome/<name>')
-def welcome_name(name):
-    return '<h1>Welcome user '+ name + ' !</h1>'
+@app.route('/show')
+def show():
+    alltodo = Todo.query.all()
+    print(alltodo)
+    return 'this is to return the data from database'
 
 if __name__ == "__main__":
     app.run(debug = True)
