@@ -19,10 +19,9 @@ class Todo(db.Model):
 
 @app.route("/")
 def hello_world():
-    todo = Todo(title = "First Todo",desc ="Testing first todo!")
-    db.session.add(todo)
-    db.session.commit()
-    return render_template('index.html')
+    alltodo = Todo.query.all()
+
+    return render_template('index.html',alltodo=alltodo)
 
 @app.route('/show')
 def show():
